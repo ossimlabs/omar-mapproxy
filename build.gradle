@@ -9,19 +9,19 @@ buildscript {
 
     dockerStatementsOverride = {
        [
-          "FROM ${project.dockerNamespaceUrl}${project.ext.baseImage}:${project.dockerAppTag}",
-//          "FROM ${project.dockerNamespaceUrl}${project.ext.baseImage}:${project.dockerAppTag}",
+          "FROM centos:latest",
           "MAINTAINER RadiantBlue Technologies radiantblue.com",
            "USER root",
            "ENV HOME /home/omar",
-          "ADD ossim.repo /etc/yum.repos.d/ossim.repo",
-          "ADD epel.repo /etc/yum.repos.d/epel.repo",
-          "ADD rhel.repo /etc/yum.repos.d/rhel.repo",
-           """RUN subscription-manager config --rhsm.manage_repos=0 && yum -y install epel-release &&\
-                  yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
-                                  java-1.8.0-openjdk haveged && yum clean all && \
-                   useradd -u 1001 -r -g 0 --create-home -d \$HOME -s /sbin/nologin -c 'Default Application User' omar""",
-		   "USER 1001"
+          """RUN yum -y install epel-release clean all && \\
+    yum install -y libffi proj freetype python python-pip python-paste python-paste-script&& yum clean all && \\
+    pip install MapProxy""",
+          """RUN useradd -u 1001 -r -g 0 --create-home -d $HOME -s /sbin/nologin -c 'Default Application User' omar &&\\
+    cd $HOME && paster create -t mapproxy_conf mymapproxy && \\
+    chown 1001:0 -R /home/omar""",
+          "USER 1001",
+           "WORKDIR /home/omar/mymapproxy/etc",
+		   "CMD mapproxy-util serve-develop mapproxy.yaml"
 		   
        ]
      }
