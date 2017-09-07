@@ -21,6 +21,7 @@ if [ -z $MAP_PROXY_HOME ] ; then
 fi                                                                                                                                                                                  
 
 if [ ! -z $MAP_PROXY_HOME ] ; then
+   echo "Using MAP_PROXY_HOME=$MAP_PROXY_HOME"
    pushd $MAP_PROXY_HOME >/dev/null
    if [ ! -f app.py ] ; then
       echo "app.py not found, generating a new app.py in $MAP_PROXY_HOME"
