@@ -19,9 +19,3 @@ WORKDIR /home/omar
 CMD ./run.sh
 ```
 Ref: [https://github.com/ossimlabs/omar-mapproxy](https://github.com/ossimlabs/omar-mapproxy)
-
-If the docker file is created then:
-
-`docker build -t omar-base:latest .`
-
-Push that to your registry and this is used as a base image for all omar services that do not require the ossim core JNI interfaces.
