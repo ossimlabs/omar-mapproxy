@@ -19,3 +19,9 @@ WORKDIR /home/omar
 CMD ./run.sh
 ```
 Ref: [https://github.com/ossimlabs/omar-mapproxy](https://github.com/ossimlabs/omar-mapproxy)
+
+Environment variables defined
+
+NUMBER_THREADS=8
+NUMBER_PROCESSES=4
+MAP_PROXY_HOME=$HOME/mapproxy
