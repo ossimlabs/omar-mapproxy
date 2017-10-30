@@ -1,4 +1,4 @@
-# OMAR Map Proxy
+# OMAR Mapproxy
 
 ## Dockerfile
 
@@ -89,9 +89,13 @@ grids:
 ```
 
 * The important part of the mapproxy file is the sources > omar-basemap:80. This needs to be pointed at the omar-basemap pod you wish to proxy and cache on the mapproxy server.
+
 3) Create a PersistenVolumeClaim for the mapproxy cache created in step 1.
 4) Deploy the omar-mapproxy image into the appropriate project. The associated pod will deploy using *port 8080*
 5) Attach the PersistenVolumeClaim created in step 3 to the deployment. Mount the claim to */mapproxy* in the mapproxy pod.
+
+### Environment Variables
+* No environment variables are required
 
 ### An Example DeploymentConfig
 
