@@ -24,18 +24,19 @@ Ref: <https://github.com/ossimlabs/omar-mapproxy>
 
 Environment variables defined
 
-NUMBER_THREADS=8
-
-NUMBER_PROCESSES=4
-
-MAP_PROXY_HOME=$HOME/mapproxy
+|Variable|Value|
+|------|------|
+|NUMBER_THREADS|8|
+|NUMBER_PROCESSES|4|
+|MAP_PROXY_HOME|$HOME/mapproxy|
 
 ## Installation in Openshift
 
 **Assumption:** The omar-mapproxy docker image is pushed into the OpenShift server's internal docker registry and available to the project.
 
-1) Create a PersistentVolume to hold cached tiles and scratch data space required by the mapproxy service. The current recommendation is approximately *50gb*
-2) Create a mapproxy.yml file on the root of the created PersistentVolume with the following contents:
+1. Create a PersistentVolume to hold cached tiles and scratch data space required by the mapproxy service. The current recommendation is approximately *50gb*
+2. Create a mapproxy.yml file on the root of the created PersistentVolume with the following contents:
+
 ```yaml
 services:
   demo:
@@ -90,9 +91,9 @@ grids:
 
 * The important part of the mapproxy file is the sources > omar-basemap:80. This needs to be pointed at the omar-basemap pod you wish to proxy and cache on the mapproxy server.
 
-3) Create a PersistenVolumeClaim for the mapproxy cache created in step 1.
-4) Deploy the omar-mapproxy image into the appropriate project. The associated pod will deploy using *port 8080*
-5) Attach the PersistenVolumeClaim created in step 3 to the deployment. Mount the claim to */mapproxy* in the mapproxy pod.
+3. Create a PersistenVolumeClaim for the mapproxy cache created in step 1.
+4. Deploy the omar-mapproxy image into the appropriate project. The associated pod will deploy using *port 8080*
+5. Attach the PersistenVolumeClaim created in step 3 to the deployment. Mount the claim to */mapproxy* in the mapproxy pod.
 
 ### Environment Variables
 * No environment variables are required
