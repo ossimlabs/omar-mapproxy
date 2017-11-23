@@ -3,36 +3,6 @@
 ## Source Location
 https://github.com/ossimlabs/omar-mapproxy
 
-## Dockerfile
-
-```
-FROM centos:latest
-MAINTAINER RadiantBlue Technologies radiantblue.com
-USER root
-ENV HOME /home/omar
-RUN yum -y install epel-release clean all && \\
-yum install -y libffi proj freetype python python-pip python-paste python-paste-script&&
-yum clean all && \\
-pip install MapProxy spawning
-RUN useradd -u 1001 -r -g 0 --create-home -d \$HOME -s /sbin/nologin -c 'Default Application User' omar
-COPY startup/run.sh \$HOME
-RUN chown 1001:0 -R /home/omar && chmod +x \$HOME/*.sh
-USER 1001
-EXPOSE 8080
-WORKDIR /home/omar
-CMD ./run.sh
-```
-
-Ref: <https://github.com/ossimlabs/omar-mapproxy>
-
-Environment variables defined
-
-|Variable|Value|
-|------|------|
-|NUMBER_THREADS|8|
-|NUMBER_PROCESSES|4|
-|MAP_PROXY_HOME|$HOME/mapproxy|
-
 ## Installation in Openshift
 
 **Assumption:** The omar-mapproxy docker image is pushed into the OpenShift server's internal docker registry and available to the project.
@@ -99,7 +69,12 @@ grids:
 5. Attach the PersistenVolumeClaim created in step 3 to the deployment. Mount the claim to */mapproxy* in the mapproxy pod.
 
 ### Environment Variables
-* No environment variables are required
+
+|Variable|Value|
+|------|------|
+|NUMBER_THREADS|8|
+|NUMBER_PROCESSES|4|
+|MAP_PROXY_HOME|$HOME/mapproxy|
 
 ### An Example DeploymentConfig
 
