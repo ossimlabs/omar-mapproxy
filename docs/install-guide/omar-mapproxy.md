@@ -1,8 +1,5 @@
 # OMAR Mapproxy
 
-## Source Location
-https://github.com/ossimlabs/omar-mapproxy
-
 ## Installation in Openshift
 
 **Assumption:** The omar-mapproxy docker image is pushed into the OpenShift server's internal docker registry and available to the project.
