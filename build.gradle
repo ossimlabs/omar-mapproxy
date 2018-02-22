@@ -49,11 +49,16 @@ buildscript {
 
   }
   dependencies {
-        classpath 'com.bmuschko:gradle-docker-plugin:3.0.7'
+        classpath "com.bmuschko:gradle-docker-plugin:${gradleDockerPluginV}"
         classpath 'com.github.skhatri:gradle-s3-plugin:1.0.4'
         classpath "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
   }
 }
+
+plugins {
+  id "com.github.ben-manes.versions" version "0.17.0"
+}
+
 
 apply plugin: "eclipse"
 apply plugin: "idea"
