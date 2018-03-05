@@ -10,7 +10,6 @@
 //    OPENSHIFT_PASSWORD: The password to use logging into the docker registry
 //==================================================================================================
 
-// TODO: get to run on any node
 def notifyObj
 node(""){
     def workspaceDir = pwd()
@@ -20,16 +19,16 @@ node(""){
 
     stage("Checkout"){
         dir(appName) {
-            git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/${appName}.git"
+            git branch: "${OSSIM_GIT_BRANCH}", url: "${GIT_PUBLIC_SERVER_URL}/${appName}.git"
         }
 
         dir(omarCommonProjName) {
-            git branch: "${OSSIM_GIT_BRANCH}", url: "https://github.com/ossimlabs/${omarCommonProjName}.git"
+            git branch: "${OSSIM_GIT_BRANCH}", url: "${GIT_PUBLIC_SERVER_URL}/${omarCommonProjName}.git"
         }
 
         // Set the environment variable for the gradle build
         // env.OMAR_COMMON_PROPERTIES="${workspaceDir}/${omarCommonProjName}/omar-common-properties.gradle"
-    }
+}
 
     stage("Download Artifacts") {
         step ([$class: "CopyArtifact",
