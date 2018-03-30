@@ -51,7 +51,7 @@ node(""){
             sh """
             pushd ${workspaceDir}/${appName}/
             cp docker/ossim-${OSSIM_GIT_BRANCH}.repo docker/ossim.repo
-            ./gradlew ${GRADLE_TASK}
+            gradle ${GRADLE_TASK}
             popd
             """
         }
