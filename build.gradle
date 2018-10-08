@@ -21,6 +21,7 @@ buildscript {
     yum install -y python-pip && \\
     yum install -y python-paste && \\
     yum install -y python-paste-script && \\
+    yum install -y  nss_wrapper gettext && \\
     yum clean all && \\
     pip install MapProxy spawning""",
           """RUN useradd -u 1001 -r -g 0 --create-home -d \$HOME -s /sbin/nologin -c 'Default Application User' omar""",
