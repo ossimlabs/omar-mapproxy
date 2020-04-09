@@ -41,9 +41,11 @@ buildscript {
   repositories {
     mavenLocal()
     maven { url "${ossimMavenProxy}" }
+    /*
     if( !System.env.WWW_CONNECTED || Boolean.parseBoolean( System.env.WWW_CONNECTED ) ) {
         maven { url "https://plugins.gradle.org/m2/" }
     }
+    */
 	  flatDir {
        dirs 'libs'
     }
