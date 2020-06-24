@@ -26,7 +26,7 @@ global:
   createPVs: true
 
   volumes:
-    basemapCache:
+    basemap-cache:
       type: null
       nfsServer: null
       nfsMountPoint: null
@@ -34,8 +34,8 @@ global:
         - ReadWriteMany
       size: 1
 
-volumes:
-  basemapCache: null
+volumeNames:
+  - basemap-cache
 
 # These variables can be overridden because of the use of the 'pluck' function:
 # - createIngress
