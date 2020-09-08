@@ -78,7 +78,7 @@ podTemplate(
       }
       load "common-variables.groovy"
     
-         switch (BRANCH_NAME) {
+        switch (BRANCH_NAME) {
         case "master":
           TAG_NAME = VERSION
           break
