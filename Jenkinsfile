@@ -102,6 +102,47 @@ podTemplate(
     DOCKER_IMAGE_PATH = "${DOCKER_REGISTRY_PRIVATE_UPLOAD_URL}/omar-mapproxy"
     
     }
+      
+          stage('Docker build') {
+      container('docker') {
+        withDockerRegistry(credentialsId: 'dockerCredentials', url: "https://${DOCKER_REGISTRY_DOWNLOAD_URL}") {  //TODO
+          if (BRANCH_NAME == 'master'){
+                sh """
+                    docker build --network=host -t "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-mapproxy-app:"${VERSION}" ./docker
+                """
+          }
+          else {
+                sh """
+                    docker build --network=host -t "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-mapproxy-app:"${VERSION}".a ./docker
+                """
+          }
+        }
+      }
+    }
+
+    stage('Docker push'){
+        container('docker') {
+          withDockerRegistry(credentialsId: 'dockerCredentials', url: "https://${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}") {
+            if (BRANCH_NAME == 'master'){
+                sh """
+                    docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-mapproxy-app:"${VERSION}"
+                """
+            }
+            else if (BRANCH_NAME == 'dev') {
+                sh """
+                    docker tag "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-mapproxy-app:"${VERSION}".a "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-mapproxy-app:dev
+                    docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-mapproxy-app:"${VERSION}".a
+                    docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-mapproxy-app:dev
+                """
+            }
+            else {
+                sh """
+                    docker push "${DOCKER_REGISTRY_PUBLIC_UPLOAD_URL}"/omar-mapproxy-app:"${VERSION}".a           
+                """
+            }
+          }
+        }
+      }
 
     stage('Package chart'){
       container('helm') {
