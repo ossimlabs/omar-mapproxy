@@ -12,7 +12,7 @@ global:
     password: null
   hostname: omar-dev.ossim.io
 
-  createIngress: true
+  createIngress: false
   useTls: false
   useTLSClientAuth: false
   sslCertSecretName: null
@@ -25,7 +25,7 @@ global:
 
   volumes:
     basemap-cache:
-      type: ""
+      type: nfs
       nfsServer: null
       nfsMountPoint: null
       accessModes:
@@ -53,10 +53,10 @@ resources:
     
 image:
   name: omar-mapproxy
-  tag: dev
+  tag: 1.1
   pullPolicy: Always
 
-ingressPath: /omar-mapproxy/(.*)
+path: /omar-mapproxy/(.*)
 ingressRewriteTarget: /$1
 internalPort: 8080
 externalPort: 8080
