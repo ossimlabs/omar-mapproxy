@@ -40,12 +40,6 @@
 {{- define "omar-mapproxy.volumeMounts" -}}
 {{- include "omar-mapproxy.volumeMounts.configmaps" . -}}
 {{- include "omar-mapproxy.volumeMounts.pvcs" . -}}
-{{- if .Values.global.extraVolumeMounts }}
-{{ toYaml .Values.global.extraVolumeMounts }}
-{{- end }}
-{{- if .Values.extraVolumeMounts }}
-{{ toYaml .Values.extraVolumeMounts }}
-{{- end }}
 {{- end -}}
 
 
