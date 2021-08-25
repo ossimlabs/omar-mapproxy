@@ -68,10 +68,4 @@
 {{- define "omar-mapproxy.volumes" -}}
 {{- include "omar-mapproxy.volumes.configmaps" . -}}
 {{- include "omar-mapproxy.volumes.pvcs" . -}}
-{{- if .Values.global.extraVolumes }}
-{{ toYaml .Values.global.extraVolumes }}
-{{- end }}
-{{- if .Values.extraVolumes }}
-{{ toYaml .Values.extraVolumes }}
-{{- end }}
 {{- end -}}
