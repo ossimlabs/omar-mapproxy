@@ -12,7 +12,7 @@ global:
     password: null
   hostname: omar-dev.ossim.io
 
-  createIngress: false
+  createIngress: true
   useTls: false
   useTLSClientAuth: false
   sslCertSecretName: null
@@ -56,7 +56,7 @@ image:
   tag: 1.1
   pullPolicy: Always
 
-path: /omar-mapproxy/(.*)
+ingressPath: /omar-mapproxy/(.*)
 ingressRewriteTarget: /$1
 internalPort: 8080
 externalPort: 8080
