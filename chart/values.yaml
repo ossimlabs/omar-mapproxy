@@ -12,7 +12,11 @@ global:
     password: null
   hostname: omar-dev.ossim.io
 
-  createIngress: true
+  ingress:
+    class: nginx
+    enabled: true
+    annotations: {}
+
   useTls: false
   useTLSClientAuth: false
   sslCertSecretName: null
@@ -55,6 +59,14 @@ image:
   name: omar-mapproxy
   tag: 1.1
   pullPolicy: Always
+
+
+ingress:
+  enabled:
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  class: # defaults to nginx if not set
 
 ingressPath: /omar-mapproxy/(.*)
 ingressRewriteTarget: /$1
