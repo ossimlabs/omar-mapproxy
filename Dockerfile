@@ -1,5 +1,5 @@
 FROM centos:latest
-MAINTAINER RadiantBlue Technologies radiantblue.com
+
 USER root
 ENV HOME /home/omar
 RUN yum -y install epel-release && \
