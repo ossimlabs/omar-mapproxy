@@ -1,10 +1,10 @@
-FROM centos:latest
+FROM rockylinux:8.5
 
 USER root
 ENV HOME /home/omar
 RUN yum -y install epel-release && \
     yum clean all && \
-    yum install -y libffi proj freetype python python-pip python-paste python-paste-script && \ 
+    yum install -y libffi proj freetype python python-pip python-paste python-paste-script && \
     yum -y update && \
     yum clean all && \
     pip install MapProxy
