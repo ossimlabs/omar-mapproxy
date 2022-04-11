@@ -27,6 +27,9 @@ global:
   createHpa: true
   createPVs: true
 
+  deployment:
+    annotations: {}
+
   volumes:
     basemap-cache:
       type: nfs
@@ -100,3 +103,6 @@ configmaps: {}
 extraInitContainers: []
 
 sideCars: []
+
+deployment:
+  annotations: {}
