@@ -30,6 +30,11 @@ global:
   deployment:
     annotations: {}
 
+  serviceAccount:
+    enabled: null
+    annotations: {}
+    # name:
+
   volumes:
     basemap-cache:
       type: nfs
@@ -62,7 +67,6 @@ image:
   name: omar-mapproxy
   tag: 1.1
   pullPolicy: IfNotPresent
-
 
 ingress:
   enabled:
@@ -106,3 +110,12 @@ sideCars: []
 
 deployment:
   annotations: {}
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  enabled: null
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and enabled is true, a name is generated using the fullname template
+  # name:
