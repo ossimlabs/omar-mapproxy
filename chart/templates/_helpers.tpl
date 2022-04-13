@@ -29,6 +29,33 @@ If release name contains chart name it will be used as a full name.
 {{- end }}
 
 {{/*
+Create chart name and version as used by the chart label.
+*/}}
+{{- define "omar-mapproxy.chart" -}}
+{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
+{{- end }}
+
+{{/*
+Common labels
+*/}}
+{{- define "omar-mapproxy.labels" -}}
+omar-mapproxy.sh/chart: {{ include "omar-mapproxy.chart" . }}
+{{ include "omar-mapproxy.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
+
+{{/*
+Selector labels
+*/}}
+{{- define "omar-mapproxy.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "omar-mapproxy.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+{{/*
 Return the proper image name
 */}}
 {{- define "omar-mapproxy.image" -}}
