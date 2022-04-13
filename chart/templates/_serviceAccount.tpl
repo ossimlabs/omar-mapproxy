@@ -19,7 +19,7 @@ Determine the serviceAccount class name
 */}}
 {{- define "omar-mapproxy.serviceAccount.name" -}}
 {{-   if eq (include "omar-mapproxy.serviceAccount.enabled" $) "true" }}
-{{-     pluck "name" .Values.serviceAccount .Values.global.serviceAccount | first | default (include "omar-mapproxy.fullname" $) -}}
+{{-     pluck "name" .Values.serviceAccount .Values.global.serviceAccount | first | default $.Values.appName -}}
 {{-   else }}
 {{-     pluck "name" .Values.serviceAccount .Values.global.serviceAccount | first | default "" -}}
 {{-   end }}
