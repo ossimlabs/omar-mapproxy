@@ -35,6 +35,8 @@ global:
     annotations: {}
     # name:
 
+  envVars: {}
+
   volumes:
     basemap-cache:
       type: nfs
