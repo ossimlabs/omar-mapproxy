@@ -1,15 +1,15 @@
-FROM centos:latest
-MAINTAINER RadiantBlue Technologies radiantblue.com
+FROM rockylinux:8.5
+
 USER root
+RUN useradd -u 1001 -r -g 0 --create-home -d $HOME -s /sbin/nologin -c 'Default Application User' omar
 ENV HOME /home/omar
 RUN yum -y install epel-release && \
     yum clean all && \
-    yum install -y libffi proj freetype python python-pip python-paste python-paste-script && \ 
+    yum install -y libffi proj freetype python3 python3-devel python3-pip python3-paste python3-paste-script zlib-devel libjpeg-devel gcc && \
     yum -y update && \
     yum clean all && \
-    pip install MapProxy
-RUN useradd -u 1001 -r -g 0 --create-home -d $HOME -s /sbin/nologin -c 'Default Application User' omar &&\
-    cd $HOME && paster create -t mapproxy_conf mymapproxy && \
+    pip3 install MapProxy
+RUN cd $HOME && paster-3 create -t mapproxy_conf mymapproxy && \
     chown 1001:0 -R /home/omar
 USER 1001
 WORKDIR /home/omar/mymapproxy/etc
