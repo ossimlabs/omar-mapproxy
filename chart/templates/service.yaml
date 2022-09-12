@@ -1,11 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  labels: {}
-  name: {{ .Values.fullnameOverride }}-app
+  labels:
+    {{- include "omar-mapproxy.labels" . | nindent 4 }}
+  name: {{ include "omar-mapproxy.fullname" . }}
 spec:
   selector:
-    app: {{ .Values.fullnameOverride }}
+    {{- include "omar-mapproxy.selectorLabels" . | nindent 4 }}
   ports:
   - name: {{ .Values.internalPort }}-tcp
     port: {{ .Values.externalPort }}

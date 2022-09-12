@@ -5,12 +5,17 @@
 fullnameOverride: omar-mapproxy
 
 global:
-  dockerRepository: nexus-docker-private-group.ossim.io
+
   imagePullSecret:
     registry: null
     username: null
     password: null
   hostname: omar-dev.ossim.io
+
+  image:
+    registry: ""
+    pullPolicy: ""
+    pullSecrets: []
 
   ingress:
     class: nginx
@@ -22,7 +27,6 @@ global:
   sslCertSecretName: null
   authSslCertSecretName: null
 
-  
   createHpa: true
   createPVs: true
 
@@ -35,6 +39,9 @@ global:
     # name:
 
   envVars: {}
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
 
   volumes:
     basemap-cache:
@@ -96,8 +103,6 @@ readinessProbe:
   timeoutSeconds: 3
   path: /
 
-
-
 terminationGracePeriodSeconds: 30
 
 envVars:
@@ -111,6 +116,10 @@ sideCars: []
 
 deployment:
   annotations: {}
+
+nodeSelector: {}
+affinity: {}
+tolerations: []
 
 serviceAccount:
   # Specifies whether a service account should be created
