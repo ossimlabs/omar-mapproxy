@@ -17,6 +17,11 @@ global:
     pullPolicy: ""
     pullSecrets: []
 
+  busybox:
+    image:
+      repository: busybox
+      tag: "1.28"
+
   ingress:
     class: nginx
     enabled: true
@@ -76,6 +81,11 @@ image:
   name: omar-mapproxy
   tag: 1.2
   pullPolicy: IfNotPresent
+
+busybox:
+  image: {}
+    # repository:
+    # tag:
 
 ingress:
   enabled:
