@@ -80,7 +80,7 @@ resources:
 image:
   name: omar-mapproxy
   tag: 1.2
-  pullPolicy: IfNotPresent
+  pullPolicy: ""
 
 busybox:
   image: {}
